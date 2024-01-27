@@ -1,5 +1,17 @@
 function RightSidebar() {
-    return <h1>RightSidebar</h1>;
-  }
-  
-  export default RightSidebar;
+  return (
+    <section className="custom-scrollbar rightsidebar">
+      <div className="flex flex-1 flex-col justify-start">
+        <h3 className="text-white text-heading4-medium">
+          Suggested Communities
+        </h3>
+      </div>
+
+      <div className="flex flex-1 flex-col justify-start">
+        <h3 className="text-white text-heading4-medium">Suggested Users</h3>
+      </div>
+    </section>
+  );
+}
+
+export default RightSidebar;

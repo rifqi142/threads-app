@@ -1,11 +1,8 @@
 "use client";
-import {
-  OrganizationSwitcher,
-  SignOutButton,
-  SignedIn,
-} from "@clerk/clerk-react";
+import { OrganizationSwitcher } from "@clerk/clerk-react";
 import Image from "next/image";
 import Link from "next/link";
+import { dark } from "@clerk/themes";
 
 function Topbar() {
   return (
@@ -16,11 +13,10 @@ function Topbar() {
       </Link>
 
       <div className="flex items-center gap-1">
-        <div className="block md:hidden">
-          
-        </div>
+        <div className="block md:hidden"></div>
         <OrganizationSwitcher
           appearance={{
+            baseTheme: dark,
             elements: {
               organizationSwitcherTrigger: "py-2 px-4",
             },
