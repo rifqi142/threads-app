@@ -1,3 +1,4 @@
+import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -112,6 +113,61 @@ const ThreadCard = ({
           </div>
         </div>
       </div>
+      {/* TODO: DeleteThread */}
+      {/* TODO: Show comment logos */}
+      {!isComment && community && (
+        <Link
+          href={`/communities/${community.id}`}
+          className="mt-5 flex items-center"
+        >
+          <p className="text-subtle-medium text-gray-1">
+            {formatDateString(createdAt)} - {community.name} Community
+          </p>
+          <Image
+            src={community.image}
+            alt={community.name}
+            width={14}
+            height={14}
+            className="ml-1 rounded-full object-cover"
+          />
+        </Link>
+      )}
+
+      {/* show replies img picture */}
+      {comments.length > 0 && (
+        <Link href={`/thread/${id}`}>
+          <div className="mt-5 ml-3 flex items-center">
+            {comments.map((comment, index) => {
+              // Memeriksa apakah gambar sudah ditampilkan sebelumnya
+              const isDuplicate = comments
+                .slice(0, index) // Mengambil komentar sebelum indeks saat ini
+                .some(
+                  (prevComment) =>
+                    prevComment.author.image === comment.author.image
+                );
+
+              // Jika bukan duplikasi, maka tampilkan gambar
+              if (!isDuplicate) {
+                return (
+                  <Image
+                    key={index}
+                    src={comment.author.image}
+                    alt="comment"
+                    width={24}
+                    height={24}
+                    className="rounded-full object-cover z-40"
+                  />
+                );
+              }
+
+              return null;
+            })}
+            <p className="text-subtle-medium text-gray-1 ml-3">
+              {comments.length} replies
+            </p>
+          </div>
+        </Link>
+      )}
     </article>
   );
 };
